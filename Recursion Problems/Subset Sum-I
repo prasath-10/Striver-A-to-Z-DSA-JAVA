@@ -1,0 +1,22 @@
+class Solution {
+
+    private static boolean findsubset(int index, int[] arr, int sum) {
+        // Base conditions
+        if (sum == 0) return true;
+        if (index == arr.length) return false;
+
+        // Pick the current element if it does not exceed the sum
+        if (arr[index] <= sum) {
+            if (findsubset(index + 1, arr, sum - arr[index])) {
+                return true;
+            }
+        }
+
+        // Not pick the current element
+        return findsubset(index + 1, arr, sum);
+    }
+
+    static Boolean isSubsetSum(int arr[], int sum) {
+        return findsubset(0, arr, sum);
+    }
+}
