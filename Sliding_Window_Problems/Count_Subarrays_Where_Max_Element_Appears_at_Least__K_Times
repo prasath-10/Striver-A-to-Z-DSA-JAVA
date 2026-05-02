@@ -1,0 +1,33 @@
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        int max=0;
+        for(int num:nums){
+            if(num > max){
+                max=num;
+            }
+        }
+        HashMap<Integer,Integer> mapp=new HashMap<>();
+        long count=0;
+        int left=0;
+        for(int right=0;right < nums.length;right++)
+        {
+            if(mapp.containsKey(nums[right])){
+                mapp.put(nums[right],mapp.get(nums[right])+1);
+            }
+            else{
+                mapp.put(nums[right],1);
+            }
+            if(nums[right] == max)
+            {
+               while (mapp.get(nums[right]) >= k)
+                {
+                    count=count+(nums.length-right);
+                    mapp.put(nums[left],mapp.get(nums[left]) -1);
+                    left++;
+                }
+            }
+        }
+        return count;
+        
+    }
+}
