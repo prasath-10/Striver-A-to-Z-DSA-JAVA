@@ -1,0 +1,24 @@
+class Solution {
+    public int numberOfSubstrings(String s, int k) {
+        HashMap<Character,Integer> mapp=new HashMap<>();
+        int left=0;
+        int count=0;
+        for(int right=0;right<s.length();right++)
+        {
+            if(mapp.containsKey(s.charAt(right)))
+            {
+                mapp.put(s.charAt(right),mapp.get(s.charAt(right))+1);
+            }
+            else{
+                mapp.put(s.charAt(right),1);
+            }
+            while(mapp.get(s.charAt(right)) >= k){
+                count=count+(s.length() - right);
+                mapp.put(s.charAt(left),mapp.get(s.charAt(left))-1);
+                left++;
+            }
+        }
+        return count;
+        
+    }
+}
