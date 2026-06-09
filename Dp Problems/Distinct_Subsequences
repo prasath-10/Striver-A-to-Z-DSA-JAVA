@@ -1,0 +1,31 @@
+class Solution {
+    public int distince(int index,int target,String s,String t,int[][] dp){
+        if(target < 0){
+            return 1;
+        }
+        if(index < 0){
+            return 0;
+        }
+        if(dp[index][target] != -1){
+            return dp[index][target];
+        }
+        if (s.charAt(index) == t.charAt(target)){
+            return dp[index][target] = distince(index-1,target-1,s,t,dp) + distince(index -1,target,s,t,dp);
+
+        }
+        else
+           return dp[index][target] =  distince(index-1,target,s,t,dp);
+
+    }
+    public int numDistinct(String s, String t) {
+        int a=s.length();
+        int b=t.length();
+        int[][] dp=new int[a][b];
+        for(int[] rows : dp){
+            Arrays.fill(rows, -1);
+        }
+
+        return distince(a-1,b-1,s,t,dp);
+        
+    }
+}
