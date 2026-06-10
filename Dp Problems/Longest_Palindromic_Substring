@@ -1,0 +1,41 @@
+int palindrome(int i,int j,char*s){
+    while(i<=j)
+    {
+        if(s[i]!=s[j])
+        {
+            return 0;
+        }
+        i++;
+        j--;
+    }
+    return 1;
+}
+char* longestPalindrome(char* s) {
+    static char str[1001];
+    int index=0;
+    int l=strlen(s);
+    int max=0;
+    int start;
+    for(int i=0;i<l;i++)
+    {
+        for(int j=0;j<l;j++)
+        {
+            if(palindrome(i,j,s))
+            {
+                int current=j-i+1;
+                if(current>max)
+                {
+                    max=current;
+                    start=i;
+                }
+            }
+        }
+    }
+    for(int k=start;k<start+max;k++)
+    {
+        str[index++]=s[k];
+    }
+    str[index]='\0';
+    return str;
+    
+}
