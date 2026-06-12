@@ -1,0 +1,45 @@
+class Solution {
+    public boolean match(int i , int j ,String s1 , String s2 , int[][] dp){
+        if( i < 0 && j < 0){
+            return true;
+        }
+        if( i < 0 && j >= 0){
+            return false;
+        }
+        if(j < 0 && i >= 0){
+            for(int k=0 ; k<=i;k++)
+            {
+                if(s1.charAt(k) != '*'){
+                    return false;
+                }
+            }
+            return true;
+        }
+        if(dp[i][j] != -1){
+            return dp[i][j] == 1;
+        }
+        boolean ans;
+
+        if(s1.charAt(i) == s2.charAt(j) || s1.charAt(i) == '?'){
+            ans = match(i-1,j-1,s1,s2,dp);
+        }
+       else  if(s1.charAt(i) == '*'){
+              ans = match(i-1,j,s1,s2,dp) || match(i,j-1,s1,s2,dp);
+        }
+        else{
+            ans=false;
+        }
+        dp[i][j] = ans ? 1 : 0;
+        return ans;
+    }
+    public boolean isMatch(String s, String p) {
+        int m=p.length();
+        int n=s.length();
+        int[][] dp=new int[m][n];
+        for(int[] rows : dp){
+            Arrays.fill(rows,-1);
+        }
+        return match(m-1 , n-1 , p , s , dp);
+        
+    }
+}
