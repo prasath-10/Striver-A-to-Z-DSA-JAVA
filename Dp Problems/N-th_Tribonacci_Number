@@ -1,0 +1,13 @@
+class Solution {
+    public int tribonacci(int n) {
+        int[] tri=new int[45];
+        tri[0]=0;
+        tri[1]=1;
+        tri[2]=1;
+        for(int i=0;i<=n;i++)
+        {
+            tri[i+3]=tri[i]+tri[i+1]+tri[i+2];
+        }
+        return tri[n];
+    }
+}
