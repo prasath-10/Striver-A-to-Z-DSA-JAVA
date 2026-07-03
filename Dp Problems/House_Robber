@@ -1,0 +1,26 @@
+class Solution {
+    int robber (int i , int[] dp , int[] nums){
+        if(i == 0){
+            return nums[i];
+        }
+         if ( i < 0){
+            return 0;
+        }
+        if(dp[i] != -1){
+            return dp[i];
+        }
+       
+        int left = 0;
+        
+         left = nums[i] + robber( i - 2 , dp , nums);
+        
+        int right = 0 + robber(i -1 , dp ,nums);
+        return dp[i] =  Math.max(left,right);
+    }
+    public int rob(int[] nums) {
+        int [] dp = new int[nums.length + 1];
+        Arrays.fill(dp , -1);
+        return robber(nums.length -1 , dp , nums);
+        
+    }
+}
