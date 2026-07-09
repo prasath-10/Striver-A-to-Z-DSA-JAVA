@@ -1,0 +1,51 @@
+class Solution {
+
+    //memoiziation logic 
+
+
+    // public int minpath(int i, int j ,int[][]matrix,int[][]dp){
+    //     if( j < 0 || j >= matrix[0].length){
+    //         return (int) 1e9;
+    //     }
+    //     if(i == 0){
+    //         return matrix[0][j];
+    //     }
+    //     if(dp[i][j] != -1){
+    //         return dp[i][j];
+    //     }
+    //     int down=matrix[i][j] + minpath(i-1 , j , matrix , dp);
+    //     int left=matrix[i][j] + minpath(i-1 , j-1 , matrix, dp);
+    //     int right= matrix[i][j]+ minpath(i-1 , j+1 , matrix, dp);
+        
+    //     return dp[i][j]=Math.min(right,Math.min(down , left));
+
+    // }
+    public int minFallingPathSum(int[][] matrix) {
+        int m=matrix.length;
+        int n=matrix[0].length;
+        int ans=Integer.MAX_VALUE;
+        int[][] dp=new int[m][m];
+        for(int j = 0; j < n ; j++)
+        {
+            dp[0][j]=matrix[0][j];
+        }
+        for(int i = 1; i < m; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                int left=matrix[i][j] + dp[i-1][j];
+                int up=matrix[i][j] + (j > 0 ? dp[i-1][j-1] : (int)1e9);
+                int down=matrix[i][j] + (j < n-1 ? dp[i-1][j+1] : (int)1e9);
+                dp[i][j]=Math.min(left,Math.min(up,down));
+            }
+        }
+      
+        for (int j = 0; j < n; j++) {
+            ans = Math.min(ans,dp[m-1][j]);
+        }
+
+        return ans;
+    }
+        
+    
+}
