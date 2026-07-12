@@ -1,0 +1,50 @@
+class Solution {
+    public int maximum(int[] nums){
+        int max=nums[0];
+        for(int i=1;i<nums.length;i++)
+        {
+            if(nums[i]>max){
+                max=nums[i];
+            }
+        }
+        return max;
+    }
+    public int submation(int[] nums){
+        int total=0;
+        for(int i=0;i<nums.length;i++){
+            total=total+nums[i];
+        }
+        return total;
+    }
+    public int totalsubarray(int[] nums,int range){
+        int subarray=0;
+        int sum=1;
+        for(int i=0;i<nums.length;i++){
+            if(subarray+nums[i]<=range){
+                subarray=subarray+nums[i];
+            }
+            else{
+                sum++;
+                subarray=nums[i];
+            }
+        }
+        return sum;
+
+    }
+    public int splitArray(int[] nums, int k) {
+        int low=maximum(nums);
+        int high=submation(nums);
+        while(low <= high){
+            int mid=(low + high)/2;
+            int large=totalsubarray(nums,mid);
+            if(large > k){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return low;
+        
+    }
+}
