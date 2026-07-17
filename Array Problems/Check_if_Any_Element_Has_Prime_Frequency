@@ -1,0 +1,33 @@
+class Solution {
+    int isprime(int n){
+        if(n<2)
+        {
+            return 0;
+        }
+        for(int i=2;i<=Math.sqrt(n);i++)
+        {
+            if(n%i==0)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    public boolean checkPrimeFrequency(int[] nums) {
+        Map<Integer,Integer>mapp=new HashMap<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            mapp.put(nums[i],mapp.getOrDefault(nums[i],0)+1);
+        }
+        for(int i=0;i<nums.length;i++)
+        {
+            int n=mapp.get(nums[i]);
+            if(isprime(n)==1)
+            {
+                return true;
+            }
+        }
+        return false;
+        
+    }
+}
