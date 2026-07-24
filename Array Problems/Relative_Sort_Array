@@ -1,0 +1,41 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        HashMap<Integer ,Integer > mapp = new HashMap<>();
+        Arrays.sort(arr1);
+        int [] arr = new int[arr1.length + arr2.length];
+        int index = 0;
+        for(int  num : arr1){
+            if(mapp.containsKey(num)){
+                mapp.put(num , mapp.get(num)  +1);
+            }
+            else{
+                mapp.put(num , 1);
+            }
+        }
+        for(int  num : arr2){
+            if(mapp.containsKey(num)){
+                int value = mapp.get(num);
+                while(value > 0){
+                    arr[index++] = num;
+                    value --;
+                }
+                mapp.remove(num);
+            }
+        }
+        System.out.println(mapp);
+        for(int num :arr1){
+            if(mapp.get(num) != null && mapp.get(num) >= 1){
+                  int  b = mapp.get(num);
+                  while(b > 0){
+                    arr[index++] = num;
+                    b--;
+                  }
+                  mapp.remove(num);
+            }
+        }
+            
+        
+        return Arrays.copyOf(arr , index);
+        
+    }
+}
