@@ -1,0 +1,13 @@
+class Solution {
+    public int maxProduct(int n) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        while(n > 0){
+            ans.add(n % 10);
+            n = n/10;
+        }
+        Collections.sort(ans);
+        int a = ans.size();
+        return ans.get(a - 1) * ans.get(a -2);
+        
+    }
+}
