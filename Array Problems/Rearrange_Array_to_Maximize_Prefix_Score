@@ -1,0 +1,21 @@
+class Solution {
+    public int maxScore(int[] nums) {
+        Arrays.sort(nums);
+        long   [] suffix = new long [nums.length];
+        suffix[nums.length - 1] = nums[nums.length - 1];
+        for(int i = nums.length - 2 ; i >= 0 ; i--)
+        {
+            suffix[i]  = nums[i] + suffix[i + 1];
+        }
+        int count = 0;
+        for(int i = 0 ; i < suffix.length ; i++)
+        {
+            if(suffix[i] > 0){
+                count++;
+            }
+        }
+        return count;
+
+        
+    }
+}
